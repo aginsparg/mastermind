@@ -1,19 +1,19 @@
 package controller;
 
-import model.Board;
-import view.View;
+
 
 public class Controller {
 
-    public static void main(String [] args){
+    public void playMastermind(){
+
 
         GameSetup gameSetup = new GameSetup();
         GamePlay gamePlay = new GamePlay();
         Integer numberPlayers;
 
 
-        gameSetup.welcomeToGame();
-        numberPlayers = gameSetup.gameOption();
+        numberPlayers = GameSetup.numberOfPlayers;
+
 
         if (numberPlayers ==1){
             gamePlay.playSinglePlayer();
@@ -22,13 +22,9 @@ public class Controller {
             gamePlay.playTwoPlayer();
         }
 
-        while(gamePlay.gameIsNotOver()){
-            gamePlay.guessPeg();
 
-        }
-
-        System.out.println("Congrats! You finished!");
-
-
+            while (gamePlay.gameIsNotOver()) {
+                gamePlay.guessPeg();
+            }
     }
 }

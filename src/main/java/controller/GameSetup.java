@@ -1,37 +1,59 @@
 package controller;
 
-import java.util.Scanner;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class GameSetup {
 
-    Scanner keyboard = new Scanner(System.in);
+
+    GameUserInput gameUserInput = new GameUserInput();
+    OutputToUser outputToUser = new OutputToUser();
+    static Integer amountWantToPlay = 0;
+    static Integer numberOfPlayers;
 
     public void welcomeToGame(){
-        System.out.println("Welcome to Mastermind. In this game the goal is to figure out the secret code. ");
-        System.out.println("You have the choices of red, orange, blue, white, purple, and yellow pegs.");
-        System.out.println("Following each guess the computer will print out Rs or Ws to indicate the accuracy of your guess.");
-        System.out.println("R shows that a peg is the correct color and correct location while W shows a peg is the correct color but not the correct location.");
-        System.out.println("You have 12 chances to break the code and win the game. Enjoy the challenge!");
+        outputToUser.welcomeMessage();
     }
 
-    public Integer gameOption() {
-        int input2=0;
-        System.out.println("If you would you like to play against the computer press 1. If you would like to play against a friend press 2. Then press Enter");
-        String input = keyboard.next();
+    public void gameOption() {
+        numberPlayers();
+
+        if (numberOfPlayers==2) {
+            amountRoundsToPlay();
+        }
+    }
+
+
+    private void numberPlayers() {
+        numberOfPlayers=0;
+        outputToUser.askNumberPlayers();
+        String numberPlayers = gameUserInput.nextInput();
 
         try{
-             input2 = Integer.parseInt(input);
+            numberOfPlayers = Integer.parseInt(numberPlayers);
 
-             if (input2>2){
-                 System.out.println("That is not a valid input. Please input a 1 or 2");
-                 gameOption();
-             }
+            if (numberOfPlayers>2 || numberOfPlayers<1){
+                outputToUser.numberPlayersErrorMessage();
+                gameOption();
+            }
         }catch (Exception e){
-            System.out.println("That is not a valid input. Please input a 1 or 2.");
+            outputToUser.numberPlayersErrorMessage();
             gameOption();
         }
-        return input2;
     }
 
 
+    public void amountRoundsToPlay() {
+        outputToUser.roundsToPlayMessage();
+        String roundsPlaying = gameUserInput.nextInput();
+
+        try{
+            amountWantToPlay = Integer.parseInt(roundsPlaying) *2;
+        }catch (Exception e){
+            outputToUser.invalidInputMessage();
+            amountRoundsToPlay();
+        }
+    }
 }

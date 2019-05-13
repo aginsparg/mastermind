@@ -17,7 +17,7 @@ public class Board {
 
 
     private List<String> row=new ArrayList<>();
-    private List<String> secretCode = new ArrayList<>();
+    private String secretCode = "";
     private List<String> clues = new ArrayList<>();
 
 
@@ -25,7 +25,7 @@ public class Board {
 
     public void setSecretCode(String code) {
 
-            secretCode.add(code);
+            secretCode = code;
 
     }
 

@@ -9,7 +9,7 @@ public class ViewService {
     public void formatBoardAndPrint(Board board){
 
         List<String>rows = board.getRow();
-
+        System.out.println("The Board:");
         for (int i =0; i<rows.size(); i++) {
             String row = rows.get(i);
             for (int m=0; m<4; m++){
@@ -23,10 +23,10 @@ public class ViewService {
 
 
     public void formatAndPrintCode(Board board) {
-        List<String> code = board.getSecretCode();
-
-        for (int i =0; i<code.size(); i++) {
-            System.out.print("     " + code.get(i));
+        String code = board.getSecretCode();
+        System.out.println("The Code:");
+        for (int i =0; i<code.length(); i++) {
+            System.out.print("     " + code.charAt(i));
         }
         System.out.println();
     }
